@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashcardAppMobile.TestSettingsPage"
+             Title="Test Settings">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#44A0F0">
+
+            <Frame Margin="10,10,10,10" CornerRadius="10">
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="Answer Order" Margin="20,20,0,0" Grid.Column="0"/>
+                        <Picker x:Name="testType" Title="Answer Order" HorizontalTextAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+                    <TableView Intent="Settings">
+                        <TableRoot>
+                            <TableSection Title="Flashcard Settings">
+                                <SwitchCell x:Name="randomiseOrder" Text="Randomise Flashcard Order" On="True"/>
+                                <SwitchCell x:Name="repeatMistakes" Text="Repeat Mistakes" On="True"/>
+                                <SwitchCell x:Name="caseSensitive" Text="Case Sensitive" On="False"/>
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                </StackLayout>
+            </Frame>
+
+            <Button x:Name="StartTest" 
+                    Text="Start Test"
+                    TextColor="White"
+                    BackgroundColor="Orange"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="10"
+                    Margin="10,10,10,10"
+                    Clicked="StartTest_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

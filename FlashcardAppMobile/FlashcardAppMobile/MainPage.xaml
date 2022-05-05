@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashcardAppMobile.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <StackLayout BackgroundColor="#44A0F0">
+        
+        <Frame BackgroundColor="Orange" Padding="24" CornerRadius="0">
+            <Label Text="Flashcards" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <Label Text="Select a flashcard set or create a new one" 
+               FontSize="18" 
+               TextColor="White" 
+               HorizontalTextAlignment="Center" 
+               Margin="10,20,10,20"/>
+
+        <Label x:Name="noFlashcardSetsLabel" 
+                Text="You have no flashcard sets." 
+                HorizontalTextAlignment="Center" 
+                TextColor="White"/>
+
+        <ListView x:Name="flashcardSetView"
+            ItemsSource="{Binding FlashcardSets}" Refreshing="flashcardSetView_Refreshing" BackgroundColor="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding SetName}" TextColor="Black" Detail="{Binding SetDescription}" DetailColor="Gray"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid>
+            <Button x:Name="Edit"
+                    Text="Edit"
+                    TextColor="White" 
+                    BackgroundColor="#3C8ED6" 
+                    BorderColor="White" 
+                    BorderWidth="3" 
+                    CornerRadius="30"
+                    Margin="10,10,0,5"
+                    VerticalOptions="EndAndExpand"
+                    Grid.Column="0"
+                    Clicked="Edit_Clicked"/>
+
+            <Button x:Name="CreateNewFlashcardSet"
+                    Text="Create"
+                    TextColor="White" 
+                    BackgroundColor="#3C8ED6" 
+                    BorderColor="White" 
+                    BorderWidth="3" 
+                    CornerRadius="30"
+                    Margin="0,10,10,5"
+                    VerticalOptions="EndAndExpand"
+                    Grid.Column="1"
+                    Clicked="CreateNewFlashcardSet_Clicked"/>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Button x:Name="Test" 
+                Text="Test yourself!" 
+                TextColor="White" 
+                FontSize="18"
+                BackgroundColor="Orange" 
+                BorderColor="White" 
+                BorderWidth="3" 
+                CornerRadius="10" 
+                Margin="10,5,10,5" 
+                Padding="10,15,10,15"
+                VerticalOptions="EndAndExpand"
+                Clicked="Test_Clicked"/>
+
+    </StackLayout>
+
+</ContentPage>

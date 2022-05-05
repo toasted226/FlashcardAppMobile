@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashcardAppMobile.TestFlashcardsPage"
+             Title="Flashcard Test">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#44A0F0">
+
+            <Frame BackgroundColor="Orange" CornerRadius="10" BorderColor="White" Margin="10,20,10,20" Padding="0,10,0,10">
+                <StackLayout>
+                    
+                    <Label x:Name="flashcardLabel" 
+                           Text="Der Mann" 
+                           TextColor="White" 
+                           FontSize="30"
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center"
+                           Margin="5,5,5,0"/>
+
+                    <Label x:Name="correctAnswerLabel" 
+                           Text="" 
+                           TextColor="#00FF00" 
+                           FontSize="25"
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center"
+                           Margin="5,0,5,0"/>
+
+                    <Label x:Name="progressLabel"
+                           Text="1/10"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"
+                           Margin="5,20,5,0"/>
+
+                </StackLayout>
+            </Frame>
+
+            <Label Text="Answer:"
+                   TextColor="White"
+                   FontSize="30"
+                   HorizontalTextAlignment="Center"/>
+
+            <Entry x:Name="answerEntry"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   Margin="40,0,40,0"
+                   TextChanged="answerEntry_TextChanged"/>
+
+            <Label x:Name="warningLabel"
+                   Text="This field cannot be left blank."
+                   FontSize="12"
+                   TextColor="Red"
+                   IsVisible="False"
+                   HorizontalTextAlignment="Center"/>
+
+            <Grid>
+                <Button x:Name="CheckAnswerButton"
+                        Text="Check"
+                        TextColor="White"
+                        CornerRadius="40"
+                        BackgroundColor="#3C8ED6"
+                        BorderColor="White"
+                        BorderWidth="3"
+                        Margin="10,10,5,10"
+                        Clicked="CheckAnswerButton_Clicked"
+                        Grid.Column="0"/>
+
+                <Button x:Name="NextWord"
+                        Text="Next"
+                        TextColor="White"
+                        CornerRadius="40"
+                        BackgroundColor="#3C8ED6"
+                        BorderColor="White"
+                        BorderWidth="3"
+                        Margin="5,10,10,10"
+                        Clicked="NextWord_Clicked"
+                        Grid.Column="1"/>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

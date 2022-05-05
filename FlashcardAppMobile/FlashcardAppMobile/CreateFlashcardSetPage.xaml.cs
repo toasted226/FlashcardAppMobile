@@ -24,7 +24,7 @@ namespace FlashcardAppMobile
 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopToRootAsync();
+            await Navigation.PopToRootAsync(true);
         }
 
         private void Accept_Clicked(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace FlashcardAppMobile
 
                     DisplayAlert("Success", "Flashcard set created successfully.", "OK");
                     mainPage.UpdateFlashcardSets();
-                    Navigation.PopToRootAsync();
+                    Navigation.PopToRootAsync(true);
                 }
                 else
                 {

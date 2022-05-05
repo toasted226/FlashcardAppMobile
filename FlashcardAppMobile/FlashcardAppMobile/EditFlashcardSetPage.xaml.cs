@@ -67,7 +67,7 @@ namespace FlashcardAppMobile
 
             if (canExit)
             {
-                await Navigation.PopToRootAsync();
+                await Navigation.PopToRootAsync(true);
             }
         }
 

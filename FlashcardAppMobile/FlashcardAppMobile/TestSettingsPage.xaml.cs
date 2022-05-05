@@ -58,7 +58,7 @@ namespace FlashcardAppMobile
             settings.caseSensitive = caseSensitive.On;
             settings.showCorrectAnswers = showCorrectAnswers.On;
 
-            await Navigation.PushAsync(new TestFlashcardsPage(flashcardSet, settings));
+            await Navigation.PushAsync(new TestFlashcardsPage(flashcardSet, settings), true);
         }
     }
 }

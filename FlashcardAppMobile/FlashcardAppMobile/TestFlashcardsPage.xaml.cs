@@ -263,7 +263,7 @@ namespace FlashcardAppMobile
                     correctAnswers, 
                     totalFlashcards,
                     settings
-                ));
+                ), true);
         }
     }
 }

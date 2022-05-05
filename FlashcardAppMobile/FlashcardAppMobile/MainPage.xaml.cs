@@ -52,7 +52,7 @@ namespace FlashcardAppMobile
         private async void CreateNewFlashcardSet_Clicked(object sender, EventArgs e)
         {
             var createFlashcardSetPage = new CreateFlashcardSetPage();
-            await Navigation.PushAsync(createFlashcardSetPage);
+            await Navigation.PushAsync(createFlashcardSetPage, true);
             createFlashcardSetPage.mainPage = this;
         }
 
@@ -82,7 +82,7 @@ namespace FlashcardAppMobile
 
             if (selectedSet != null)
             {
-                await Navigation.PushAsync(new EditFlashcardSetPage(this, selectedSet));
+                await Navigation.PushAsync(new EditFlashcardSetPage(this, selectedSet), true);
             }
             else 
             {
@@ -96,7 +96,7 @@ namespace FlashcardAppMobile
 
             if (flashcardSet != null)
             {
-                Navigation.PushAsync(new TestSettingsPage(flashcardSet));
+                Navigation.PushAsync(new TestSettingsPage(flashcardSet), true);
             }
             else
             {

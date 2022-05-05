@@ -26,6 +26,9 @@
                                 <SwitchCell x:Name="repeatMistakes" Text="Repeat Mistakes" On="True"/>
                                 <SwitchCell x:Name="caseSensitive" Text="Case Sensitive" On="False"/>
                             </TableSection>
+                            <TableSection Title="Results Settings">
+                                <SwitchCell x:Name="showCorrectAnswers" Text="Show Correct Answers" On="True"/>
+                            </TableSection>
                         </TableRoot>
                     </TableView>
                 </StackLayout>

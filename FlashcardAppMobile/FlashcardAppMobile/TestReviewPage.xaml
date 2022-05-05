@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashcardAppMobile.TestReviewPage"
+             Title="Results Review">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#44A0F0">
+
+            <Frame BackgroundColor="Orange">
+                <StackLayout>
+                    <Label Text="Review Results" 
+                           TextColor="White" 
+                           FontSize="30" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="Orange" 
+                   CornerRadius="10" 
+                   BorderColor="White" 
+                   Margin="10,10,10,10">
+                
+                <StackLayout>
+                    <Label x:Name="correctAnswersLabel"
+                           Text="6 of 10"
+                           TextColor="White" 
+                           FontSize="25" 
+                           FontAttributes="Bold" 
+                           Margin="10,0,10,0"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Flashcards answered correctly" 
+                           TextColor="White" 
+                           FontSize="20" 
+                           HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame CornerRadius="5" 
+                   Padding="5" 
+                   BorderColor="White" 
+                   Margin="10,10,10,10">
+
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Frame Padding="0,5,0,5" 
+                               BackgroundColor="Orange" 
+                               BorderColor="White" 
+                               Grid.Column="0" 
+                               Grid.Row="0">
+
+                            <Label Text="Flashcard" 
+                                   TextColor="White" 
+                                   HorizontalTextAlignment="Center"/>
+                        </Frame>
+                        <Frame Padding="0,5,0,5" 
+                               BackgroundColor="Orange" 
+                               BorderColor="White" 
+                               Grid.Column="1" 
+                               Grid.Row="0">
+
+                            <Label Text="Incorrect answers" 
+                                   TextColor="White" 
+                                   HorizontalTextAlignment="Center"/>
+                        </Frame>
+                    </Grid>
+
+                    <CollectionView x:Name="resultsView" 
+                                    BackgroundColor="#44A0F0" 
+                                    ItemsSource="{Binding FlashcardStatistics}">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                           Text="{Binding flashcardValue}"
+                                           TextColor="White"
+                                           FontAttributes="Bold"/>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding wrongAnswers}"
+                                           TextColor="White"
+                                           HorizontalOptions="EndAndExpand"
+                                           FontAttributes="Bold"
+                                           Padding="75,0,0,0"
+                                           FontSize="20"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Frame>
+
+            <Button x:Name="HomeButton"
+                    Text="Home"
+                    TextColor="White"
+                    BackgroundColor="Orange"
+                    CornerRadius="10"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    Margin="10"
+                    Grid.Column="0"
+                    Clicked="HomeButton_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

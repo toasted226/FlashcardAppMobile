@@ -18,17 +18,16 @@ namespace FlashcardAppMobile
         public Flashcard[] flashcards;
 
         public List<Flashcard> incorrectFlashcards = new List<Flashcard>();
+        public List<FlashcardStatistic> flashcardStatistics = new List<FlashcardStatistic>();
 
-        public int currentFlashcard = 0;
-        public string correctAnswer;
+        private int currentFlashcard;
+        private string correctAnswer;
 
-        bool isFinished;
+        private bool mainSetFinished;
+        private bool isFinished;
 
-        public struct FlashcardStatistics 
-        {
-            public Flashcard flashcard;
-            public int wrongAnswers;
-        };
+        private int correctAnswers;
+        private int totalFlashcards;
 
         public TestFlashcardsPage()
         {
@@ -51,12 +50,36 @@ namespace FlashcardAppMobile
             {
                 flashcards = flashcards.OrderBy(x => Guid.NewGuid()).ToArray();
             }
+            totalFlashcards = flashcards.Length;
 
             StartTest();
         }
 
+        private void CreateFlashcardStatistic() 
+        {
+            FlashcardStatistic flashcardStatistic = new FlashcardStatistic();
+            flashcardStatistic.flashcardValue = flashcards[currentFlashcard].Value;
+            flashcardStatistic.wrongAnswers = 0;
+
+            bool foundExisting = false;
+            foreach (var stat in flashcardStatistics)
+            {
+                if (stat.flashcardValue == flashcardStatistic.flashcardValue)
+                {
+                    foundExisting = true;
+                }
+            }
+
+            if (!foundExisting)
+            {
+                flashcardStatistics.Add(flashcardStatistic);
+            }
+        }
+
         private void AssignQuestionAndAnswer() 
         {
+            CreateFlashcardStatistic();
+
             if (settings.testType == TestSettings.TestType.Random)
             {
                 int ran = new Random().Next(0, 2);
@@ -117,11 +140,13 @@ namespace FlashcardAppMobile
             answerEntry.Text = "";
             warningLabel.IsVisible = false;
             currentFlashcard = 0;
+            mainSetFinished = true;
 
             if (incorrectFlashcards.Count == 0)
             {
                 flashcardLabel.Text = "Test finished!";
                 isFinished = true;
+                SeeResults.IsEnabled = true;
             }
             else
             {
@@ -135,6 +160,7 @@ namespace FlashcardAppMobile
                 {
                     flashcardLabel.Text = "Test finished!";
                     isFinished = true;
+                    SeeResults.IsEnabled = true;
                 }
             }
         }
@@ -163,6 +189,7 @@ namespace FlashcardAppMobile
             {
                 if (answer.ToLower() == correctAnswer.ToLower())
                 {
+                    correctAnswers = !mainSetFinished ? correctAnswers + 1 : correctAnswers;
                     return true;
                 }
             }
@@ -170,6 +197,7 @@ namespace FlashcardAppMobile
             {
                 if (answer == correctAnswer)
                 {
+                    correctAnswers = !mainSetFinished ? correctAnswers + 1 : correctAnswers;
                     return true;
                 }
             }
@@ -177,6 +205,15 @@ namespace FlashcardAppMobile
             if (!incorrectFlashcards.Contains(flashcards[currentFlashcard]))
             {
                 incorrectFlashcards.Add(flashcards[currentFlashcard]);
+
+                //find flashcard in statistics and increment wrong answers
+                foreach (var flashcardStatistic in flashcardStatistics)
+                {
+                    if (flashcardStatistic.flashcardValue == flashcards[currentFlashcard].Value)
+                    {
+                        flashcardStatistic.wrongAnswers++;
+                    }
+                }
             }
 
             return false;
@@ -216,6 +253,17 @@ namespace FlashcardAppMobile
             {
                 warningLabel.IsVisible = true;
             }
+        }
+
+        private async void SeeResults_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new TestReviewPage
+                (
+                    flashcardStatistics.ToArray(), 
+                    correctAnswers, 
+                    totalFlashcards,
+                    settings
+                ));
         }
     }
 }

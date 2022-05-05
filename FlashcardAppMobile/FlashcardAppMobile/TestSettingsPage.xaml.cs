@@ -56,6 +56,7 @@ namespace FlashcardAppMobile
             settings.randomiseOrder = randomiseOrder.On;
             settings.repeatMistakes = repeatMistakes.On;
             settings.caseSensitive = caseSensitive.On;
+            settings.showCorrectAnswers = showCorrectAnswers.On;
 
             await Navigation.PushAsync(new TestFlashcardsPage(flashcardSet, settings));
         }

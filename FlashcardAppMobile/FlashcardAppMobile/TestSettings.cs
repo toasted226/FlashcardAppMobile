@@ -11,5 +11,7 @@ namespace FlashcardAppMobile
         public bool randomiseOrder;
         public bool repeatMistakes;
         public bool caseSensitive;
+
+        public bool showCorrectAnswers;
     }
 }

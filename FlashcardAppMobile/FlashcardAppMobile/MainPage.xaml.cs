@@ -35,11 +35,13 @@ namespace FlashcardAppMobile
             if (flashcardSets.Count == 0)
             {
                 flashcardSetView.IsVisible = false;
+                viewFrame.IsVisible = false;
                 noFlashcardSetsLabel.IsVisible = true;
             }
             else
             {
                 flashcardSetView.IsVisible = true;
+                viewFrame.IsVisible = true;
                 noFlashcardSetsLabel.IsVisible = false;
             }
         }

@@ -21,16 +21,18 @@
                 HorizontalTextAlignment="Center" 
                 TextColor="White"/>
 
-        <ListView x:Name="flashcardSetView"
-            ItemsSource="{Binding FlashcardSets}" Refreshing="flashcardSetView_Refreshing" BackgroundColor="White">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding SetName}" TextColor="Black" Detail="{Binding SetDescription}" DetailColor="Gray"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Frame x:Name="viewFrame" Margin="10" CornerRadius="5" Padding="5" IsVisible="true">
+            <ListView x:Name="flashcardSetView" BackgroundColor="#44A0F0"
+                      ItemsSource="{Binding FlashcardSets}" Refreshing="flashcardSetView_Refreshing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding SetName}" TextColor="White" Detail="{Binding SetDescription}" DetailColor="LightGray"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
 
-        <Grid>
+        <Grid VerticalOptions="EndAndExpand">
             <Button x:Name="Edit"
                     Text="Edit"
                     TextColor="White" 

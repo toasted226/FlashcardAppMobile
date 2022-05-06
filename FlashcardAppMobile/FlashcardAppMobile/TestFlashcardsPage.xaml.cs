@@ -30,6 +30,8 @@ namespace FlashcardAppMobile
         private int correctAnswers;
         private int totalFlashcards;
 
+        private char separator = ';';
+
         public TestFlashcardsPage()
         {
             InitializeComponent();
@@ -84,7 +86,7 @@ namespace FlashcardAppMobile
             int index = 0;
             if (settings.randomiseQuestionTranslation)
             {
-                index = new Random().Next(0, flashcards[currentFlashcard].Translation.Split(',').Length);
+                index = new Random().Next(0, flashcards[currentFlashcard].Translation.Split(separator).Length);
             }
 
             if (settings.testType == TestSettings.TestType.Random)
@@ -94,13 +96,13 @@ namespace FlashcardAppMobile
                 {
                     flashcardLabel.Text = flashcards[currentFlashcard].Word;
                     correctAnswer = flashcards[currentFlashcard].Translation;
-                    acceptedAnswers = flashcards[currentFlashcard].Translation.Split(',');
+                    acceptedAnswers = flashcards[currentFlashcard].Translation.Split(separator);
                 }
                 else
                 {
-                    flashcardLabel.Text = flashcards[currentFlashcard].Translation.Split(',')[index];
+                    flashcardLabel.Text = flashcards[currentFlashcard].Translation.Split(separator)[index];
                     correctAnswer = flashcards[currentFlashcard].Word;
-                    acceptedAnswers = flashcards[currentFlashcard].Word.Split(',');
+                    acceptedAnswers = flashcards[currentFlashcard].Word.Split(separator);
                 }
             }
 
@@ -108,13 +110,13 @@ namespace FlashcardAppMobile
             {
                 flashcardLabel.Text = flashcards[currentFlashcard].Word;
                 correctAnswer = flashcards[currentFlashcard].Translation;
-                acceptedAnswers = flashcards[currentFlashcard].Translation.Split(',');
+                acceptedAnswers = flashcards[currentFlashcard].Translation.Split(separator);
             }
             else if (settings.testType == TestSettings.TestType.ToSet)
             {
-                flashcardLabel.Text = flashcards[currentFlashcard].Translation.Split(',')[index];
+                flashcardLabel.Text = flashcards[currentFlashcard].Translation.Split(separator)[index];
                 correctAnswer = flashcards[currentFlashcard].Word;
-                acceptedAnswers = flashcards[currentFlashcard].Word.Split(',');
+                acceptedAnswers = flashcards[currentFlashcard].Word.Split(separator);
             }
 
             for (int i = 0; i < acceptedAnswers.Length; i++)

@@ -90,17 +90,37 @@ namespace FlashcardAppMobile
             }
         }
 
-        private void Test_Clicked(object sender, EventArgs e)
+        private async void Test_Clicked(object sender, EventArgs e)
         {
             FlashcardSet flashcardSet = (FlashcardSet)flashcardSetView.SelectedItem;
 
             if (flashcardSet != null)
             {
-                Navigation.PushAsync(new TestSettingsPage(flashcardSet), true);
+                Flashcard[] flashcards = flashcardSet.GetFlashcards();
+
+                if (flashcards.Length > 0)
+                {
+                    await Navigation.PushAsync(new TestSettingsPage(flashcardSet), true);
+                }
+                else
+                {
+                    bool addFlashcards = await DisplayAlert
+                    (
+                        "Error", 
+                        "There are no flashcards in this set. Would you like to add flashcards now?", 
+                        "Yes", 
+                        "No"
+                    );
+
+                    if (addFlashcards)
+                    {
+                        await Navigation.PushAsync(new EditFlashcardSetPage(this, flashcardSet), true);
+                    }
+                }
             }
             else
             {
-                DisplayAlert("Error", "Please select a flashcard set.", "OK");
+                await DisplayAlert("Error", "Please select a flashcard set.", "OK");
             }
         }
     }

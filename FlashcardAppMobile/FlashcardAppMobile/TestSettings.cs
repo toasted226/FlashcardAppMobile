@@ -13,5 +13,7 @@ namespace FlashcardAppMobile
         public bool caseSensitive;
 
         public bool showCorrectAnswers;
+
+        public bool randomiseQuestionTranslation;
     }
 }

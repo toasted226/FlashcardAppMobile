@@ -22,6 +22,7 @@ namespace FlashcardAppMobile
 
         private int currentFlashcard;
         private string correctAnswer;
+        private string[] acceptedAnswers;
 
         private bool mainSetFinished;
         private bool isFinished;
@@ -76,9 +77,15 @@ namespace FlashcardAppMobile
             }
         }
 
-        private void AssignQuestionAndAnswer() 
+        private void AssignQuestionAndAnswer()
         {
             CreateFlashcardStatistic();
+
+            int index = 0;
+            if (settings.randomiseQuestionTranslation)
+            {
+                index = new Random().Next(0, flashcards[currentFlashcard].Translation.Split(',').Length);
+            }
 
             if (settings.testType == TestSettings.TestType.Random)
             {
@@ -87,23 +94,32 @@ namespace FlashcardAppMobile
                 {
                     flashcardLabel.Text = flashcards[currentFlashcard].Word;
                     correctAnswer = flashcards[currentFlashcard].Translation;
+                    acceptedAnswers = flashcards[currentFlashcard].Translation.Split(',');
                 }
                 else
                 {
-                    flashcardLabel.Text = flashcards[currentFlashcard].Translation;
+                    flashcardLabel.Text = flashcards[currentFlashcard].Translation.Split(',')[index];
                     correctAnswer = flashcards[currentFlashcard].Word;
+                    acceptedAnswers = flashcards[currentFlashcard].Word.Split(',');
                 }
             }
-            
+
             if (settings.testType == TestSettings.TestType.FromSet)
             {
                 flashcardLabel.Text = flashcards[currentFlashcard].Word;
                 correctAnswer = flashcards[currentFlashcard].Translation;
+                acceptedAnswers = flashcards[currentFlashcard].Translation.Split(',');
             }
             else if (settings.testType == TestSettings.TestType.ToSet)
             {
-                flashcardLabel.Text = flashcards[currentFlashcard].Translation;
+                flashcardLabel.Text = flashcards[currentFlashcard].Translation.Split(',')[index];
                 correctAnswer = flashcards[currentFlashcard].Word;
+                acceptedAnswers = flashcards[currentFlashcard].Word.Split(',');
+            }
+
+            for (int i = 0; i < acceptedAnswers.Length; i++)
+            {
+                acceptedAnswers[i] = acceptedAnswers[i].Trim();
             }
         }
 
@@ -167,38 +183,50 @@ namespace FlashcardAppMobile
 
         private void NextWord_Clicked(object sender, EventArgs e)
         {
-            if (answerEntry.Text != null && answerEntry.Text.Trim() != "")
+            if (!isFinished)
             {
-                if (!isFinished)
+                if (answerEntry.Text != null && answerEntry.Text.Trim() != "")
                 {
-                    CheckAnswer();
+                    CheckAnswer(true);
                     NextFlashcard();
                 }
-            }
-            else 
-            {
-                warningLabel.IsVisible = true;
+                else
+                {
+                    warningLabel.IsVisible = true;
+                }
             }
         }
 
-        private bool CheckAnswer()
+        private bool CheckAnswer(bool addCorrectAnswers)
         {
             string answer = answerEntry.Text.Trim();
 
             if (!settings.caseSensitive)
             {
-                if (answer.ToLower() == correctAnswer.ToLower())
+                foreach (var acceptedAnswer in acceptedAnswers)
                 {
-                    correctAnswers = !mainSetFinished ? correctAnswers + 1 : correctAnswers;
-                    return true;
+                    if (answer.ToLower() == acceptedAnswer.ToLower())
+                    {
+                        if (addCorrectAnswers)
+                        {
+                            correctAnswers = !mainSetFinished ? correctAnswers + 1 : correctAnswers;
+                        }
+                        return true;
+                    }
                 }
             }
             else
             {
-                if (answer == correctAnswer)
+                foreach (var acceptedAnswer in acceptedAnswers)
                 {
-                    correctAnswers = !mainSetFinished ? correctAnswers + 1 : correctAnswers;
-                    return true;
+                    if (answer == acceptedAnswer)
+                    {
+                        if (addCorrectAnswers)
+                        {
+                            correctAnswers = !mainSetFinished ? correctAnswers + 1 : correctAnswers;
+                        }
+                        return true;
+                    }
                 }
             }
 
@@ -227,7 +255,7 @@ namespace FlashcardAppMobile
                 {
                     correctAnswerLabel.Text = correctAnswer;
 
-                    if (CheckAnswer())
+                    if (CheckAnswer(false))
                     {
                         correctAnswerLabel.TextColor = new Color(0, 255, 0);
                     }

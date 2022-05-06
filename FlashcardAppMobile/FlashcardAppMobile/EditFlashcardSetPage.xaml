@@ -15,7 +15,7 @@
                            FontSize="18"
                            FontAttributes="Bold"
                            HorizontalTextAlignment="Center"/>
-                    
+
                     <Label Text="Add a flashcard or select one to replace"
                            TextColor="White" 
                            FontSize="18"  

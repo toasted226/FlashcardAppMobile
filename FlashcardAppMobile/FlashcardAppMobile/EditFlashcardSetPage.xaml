@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlashcardAppMobile.EditFlashcardSetPage"
-             Title="Edit Flashcard Set">
+             Title="Edit Flashcard Set"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout BackgroundColor="#44A0F0">
 
-            <Frame BackgroundColor="Orange" Margin="5,10,5,5" Padding="0,5,0,5" CornerRadius="10" BorderColor="White">
+            <Frame BackgroundColor="Orange" Padding="0,15,0,5">
                 <StackLayout>
                     
                     <Label x:Name="setNameDisplay"
                            Text="Swedish"
                            TextColor="White"
-                           FontSize="18"
+                           FontSize="25"
                            FontAttributes="Bold"
                            HorizontalTextAlignment="Center"/>
 

@@ -24,7 +24,7 @@ namespace FlashcardAppMobile
 
         public EditFlashcardSetPage()
         {
-            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
 
             flashcardsView.ItemsSource = flashcards;

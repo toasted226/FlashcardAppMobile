@@ -17,7 +17,44 @@
     <StackLayout BackgroundColor="#44A0F0">
         
         <Frame BackgroundColor="Orange" Padding="24" CornerRadius="0">
-            <Label Text="Flashcards" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Text="Flashcards" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="White" 
+                           FontSize="36" 
+                           Grid.Column="0"/>
+                    
+                    <Button x:Name="UploadButton"
+                            Text="Up" 
+                            TextColor="White" 
+                            BackgroundColor="Orange" 
+                            Padding="0" 
+                            Margin="0"
+                            Clicked="UploadButton_Clicked"
+                            IsEnabled="False"
+                            Grid.Column="1"/>
+
+                    <Button x:Name="DownloadButton"
+                            Text="Down" 
+                            TextColor="White" 
+                            BackgroundColor="Orange" 
+                            Padding="0" 
+                            Margin="0"
+                            Clicked="DownloadButton_Clicked"
+                            IsEnabled="False"
+                            Grid.Column="2"/>
+                </Grid>
+            </StackLayout>
         </Frame>
 
         <Label Text="Select a flashcard set or create a new one" 

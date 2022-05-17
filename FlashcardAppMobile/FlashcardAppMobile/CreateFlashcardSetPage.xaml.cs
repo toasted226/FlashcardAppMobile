@@ -31,6 +31,7 @@ namespace FlashcardAppMobile
         {
             string setname = flashcardSetNameEntry.Text;
             string setdescription = flashcardSetDescriptionEntry.Text;
+            int version = 0;
 
             if (setname == null || setname == "")
             {
@@ -40,7 +41,7 @@ namespace FlashcardAppMobile
             }
             else
             {
-                string information = "[\"" + setname.Trim() + "\"" + ", " + "\"" + setdescription.Trim() + "\"]";
+                string information = $"[\"{setname.Trim()}\", \"{setdescription.Trim()}\", \"{version}\"]";
                 string filename = setname.Trim() + ".txt";
                 string path = Path.Combine(App.writingPath, filename);
 

@@ -224,9 +224,9 @@ namespace FlashcardAppMobile
 
         private async void DownloadButton_Clicked(object sender, EventArgs e)
         {
-            await App.databaseInfo.QueryItemsAsync(App.userId);
             UploadButton.IsEnabled = false;
             DownloadButton.IsEnabled = false;
+            await App.databaseInfo.QueryItemsAsync(App.userId);
         }
     }
 }

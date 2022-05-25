@@ -25,9 +25,12 @@ namespace FlashcardAppMobile
             await databaseInfo.InitialiseAsync();
         }
 
-        public void DatabaseInfo_OnDatabaseInitialisationFinished()
+        public void DatabaseInfo_OnDatabaseInitialisationFinished(bool succeeded)
         {
-            databaseInitialised = true;
+            if (succeeded)
+            {
+                databaseInitialised = true;
+            }
         }
 
         protected override void OnStart()

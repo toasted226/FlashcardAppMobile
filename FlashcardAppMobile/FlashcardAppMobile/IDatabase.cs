@@ -29,7 +29,7 @@ namespace FlashcardAppMobile
         private string databaseId = "FlashcardAppDatabase";
         private string containerId = "FlashcardAppContainer";
 
-        public delegate void DBInitialisationFinished();
+        public delegate void DBInitialisationFinished(bool succeeded);
         public event DBInitialisationFinished OnDatabaseInitialisationFinished;
 
         public delegate void DBQueryItems(List<UserFlashcardInfo> userFlashcardInfos);
@@ -48,15 +48,17 @@ namespace FlashcardAppMobile
             catch (CosmosException cosmosException)
             {
                 Console.WriteLine("Cosmos Exception with Status {0} : {1}\n", cosmosException.StatusCode, cosmosException);
+                OnDatabaseInitialisationFinished?.Invoke(false);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e);
+                OnDatabaseInitialisationFinished?.Invoke(false);
             }
             finally
             {
                 Console.WriteLine("Database successfully initialised.");
-                OnDatabaseInitialisationFinished?.Invoke();
+                OnDatabaseInitialisationFinished?.Invoke(true);
             }
         }
 
